@@ -1,9 +1,31 @@
 fileFormatVersion: 2
 guid: e34ab2337b0716f41ba6cd304eae19fe
+AssetOrigin:
+  serializedVersion: 1
+  productId: 227734
+  packageName: LOW POLY - Cliffs
+  packageVersion: 1.0
+  assetPath: Assets/AGWYN's Low Poly Cliffs/Models/Cliff_Small_1.fbx
+  uploadId: 513397
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt
+    second: {fileID: 2100000, guid: ecc90c1b063f5084ab27a0b42de84446, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DirtLight
+    second: {fileID: 2100000, guid: 80a156ae2a8218b4aab361e889aa7f6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 02f61314155b6ad42bc6752eadb290da, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -16,8 +38,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -40,6 +60,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -57,6 +78,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -67,6 +91,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -99,14 +124,9 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 227734
-  packageName: LOW POLY - Cliffs
-  packageVersion: 1.0
-  assetPath: Assets/AGWYN's Low Poly Cliffs/Models/Cliff_Small_1.fbx
-  uploadId: 513397
