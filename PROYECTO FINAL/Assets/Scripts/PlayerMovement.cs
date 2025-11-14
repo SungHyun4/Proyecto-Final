@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     // ANIMACIÓN
     private Animator anim;
-    private static readonly int VelX = Animator.StringToHash("velX");
-    private static readonly int VelY = Animator.StringToHash("velY");
+    private static readonly int VelX = Animator.StringToHash("Velx");
+    private static readonly int VelY = Animator.StringToHash("Vely");
     [SerializeField] private float animDamp = 0.05f;
     private float velXCur;
     private float velYCur;
