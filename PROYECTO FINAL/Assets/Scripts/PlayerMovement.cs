@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,27 +6,34 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Velocidad de movimiento
-    public float rotationSpeed = 100f; // Velocidad de rotación
-    public float gravity = -9.81f; // Gravedad aplicada al personaje
-    public float jumpForce = 5f;   // Fuerza del salto
-    public Camera mouseOrbitCamera; // Cámara orbital para referencia
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 100f;
+    public float gravity = -9.81f;
+    public float jumpForce = 5f;
+    public Camera mouseOrbitCamera;
 
     private CharacterController controller;
     private Vector3 velocity;
 
-    // ANIMACIÓN
+    // --- GROUNDED CHECK ---
+    public Transform groundCheck;        // ðŸ‘ˆ Asignar en el Inspector
+    public float groundRadius = 0.3f;    // ðŸ‘ˆ Radio del cÃ­rculo de prueba
+    public LayerMask groundMask;         // ðŸ‘ˆ Asignar Layer "Ground"
+    private bool isGrounded;
+
+    // ANIMACIÃ“N
     private Animator anim;
     private static readonly int VelX = Animator.StringToHash("Velx");
     private static readonly int VelY = Animator.StringToHash("Vely");
+    private static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
     [SerializeField] private float animDamp = 0.05f;
     private float velXCur;
     private float velYCur;
 
-    // checkpoint dinámico
+    // checkpoint dinÃ¡mico
     private Transform currentCheckpoint;
 
-    // PlayerInput (para que no dé error)
+    // PlayerInput
     private Vector2 moveInput;
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -48,14 +55,11 @@ public class PlayerMovement : MonoBehaviour
     {
         MoveAndRotate();
 
-        // detectar caída
         if (transform.position.y <= 0f)
         {
-            // contar la caída en el GameManager
             if (GameManager.Instance != null)
                 GameManager.Instance.AddFall();
 
-            // volver al último checkpoint
             RespawnAtCheckpoint();
         }
     }
@@ -68,13 +72,11 @@ public class PlayerMovement : MonoBehaviour
         float vertical = 0f;
         float horizontal = 0f;
 
-        // Movimiento adelante/atrás (W/S o flechas)
         if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
             vertical = 1f;
         else if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
             vertical = -1f;
 
-        // Rotación izquierda/derecha (A/D o flechas)
         if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
             horizontal = -1f;
         else if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
@@ -82,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = Vector3.zero;
 
-        // Si la cámara orbital está activa
         if (mouseOrbitCamera != null && mouseOrbitCamera.gameObject.activeSelf)
         {
             Vector3 forward = mouseOrbitCamera.transform.forward;
@@ -103,17 +104,30 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
-        // salto sin grounded (como lo pediste)
-        if (keyboard.spaceKey.wasPressedThisFrame)
+        // ------------ NUEVO GROUNDED CHECK REAL ------------
+        if (groundCheck != null)
+        {
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+        }
+        else
+        {
+            isGrounded = controller.isGrounded; // fallback si te olvidas
+        }
+
+        if (isGrounded && velocity.y < 0f)
+        {
+            velocity.y = -2f;
+        }
+
+        if (keyboard.spaceKey.wasPressedThisFrame && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
 
-        // gravedad
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // ANIMACIÓN
+        // ---------- ANIMACIÃ“N ----------
         if (anim != null)
         {
             float targetVelX = 0f;
@@ -130,10 +144,11 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetFloat(VelX, velXCur);
             anim.SetFloat(VelY, velYCur);
+
+            anim.SetBool(IsGroundedHash, isGrounded);
         }
     }
 
-    // llamado por los checkpoints
     public void SetCheckpoint(Transform newCheckpoint)
     {
         currentCheckpoint = newCheckpoint;
