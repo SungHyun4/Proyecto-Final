@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Totales acumulados")]
     public int totalScore = 0;
-    public int totalFalls = 0;
+    public int totalDeaths = 0;
     public int totalCollected = 0; // se mantiene por compatibilidad
     public float totalTime = 0f;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void AddFall()
     {
-        totalFalls++;
+        totalDeaths++;
         UpdateUI();
     }
 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             scoreText.text = totalScore.ToString();
 
         if (fallsText != null)
-            fallsText.text = totalFalls.ToString();
+            fallsText.text = totalDeaths.ToString();
 
         // Timer dividido
         int minutes = Mathf.FloorToInt(totalTime / 60f);
