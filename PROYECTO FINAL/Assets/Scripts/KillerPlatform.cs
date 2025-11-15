@@ -8,7 +8,7 @@ public class KillPlatform : MonoBehaviour
 
         // Sumar caída al GameManager
         if (GameManager.Instance != null)
-            GameManager.Instance.AddFall();
+            GameManager.Instance.AddDeath();
 
         // Reaparecer en el checkpoint
         PlayerMovement player = other.GetComponent<PlayerMovement>();

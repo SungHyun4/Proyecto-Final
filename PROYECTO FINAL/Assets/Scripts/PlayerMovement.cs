@@ -16,9 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
 
     // --- GROUNDED CHECK ---
-    public Transform groundCheck;        // 👈 Asignar en el Inspector
-    public float groundRadius = 0.3f;    // 👈 Radio del círculo de prueba
-    public LayerMask groundMask;         // 👈 Asignar Layer "Ground"
+    public Transform groundCheck;
+    public float groundRadius = 0.3f;
+    public LayerMask groundMask;
     private bool isGrounded;
 
     // ANIMACIÓN
@@ -55,10 +55,11 @@ public class PlayerMovement : MonoBehaviour
     {
         MoveAndRotate();
 
+        // detectar muerte por caer al vacío
         if (transform.position.y <= 0f)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.AddFall();
+                GameManager.Instance.AddDeath();   // ← CAMBIADO
 
             RespawnAtCheckpoint();
         }
@@ -104,14 +105,14 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
-        // ------------ NUEVO GROUNDED CHECK REAL ------------
+        // GROUNDED CHECK REAL
         if (groundCheck != null)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
         }
         else
         {
-            isGrounded = controller.isGrounded; // fallback si te olvidas
+            isGrounded = controller.isGrounded;
         }
 
         if (isGrounded && velocity.y < 0f)
@@ -127,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // ---------- ANIMACIÓN ----------
+        // ANIMACIONES
         if (anim != null)
         {
             float targetVelX = 0f;

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Referencias UI (solo números)")]
     public TextMeshProUGUI scoreText;    // solo número del puntaje
-    public TextMeshProUGUI fallsText;    // solo número de caídas
+    public TextMeshProUGUI DeathsText;    // solo número de caídas
 
     [Header("Timer dividido (TMP)")]
     public TextMeshProUGUI minutesText;
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void AddFall()
+    public void AddDeath()
     {
         totalDeaths++;
         UpdateUI();
@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
         if (scoreText != null)
             scoreText.text = totalScore.ToString();
 
-        if (fallsText != null)
-            fallsText.text = totalDeaths.ToString();
+        if (DeathsText != null)
+            DeathsText.text = totalDeaths.ToString();
 
         // Timer dividido
         int minutes = Mathf.FloorToInt(totalTime / 60f);
