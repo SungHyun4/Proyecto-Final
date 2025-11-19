@@ -1,3 +1,7 @@
+/// <summary>
+/// Controla la lógica de un objeto coleccionable. 
+/// Suma o resta puntaje al jugador y se destruye al ser recogido.
+/// </summary>
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
@@ -10,7 +14,7 @@ public class Collectible : MonoBehaviour
 
     [Header("Feedback visual y sonoro")]
     public AudioClip pickupSound;
-    public ParticleSystem pickupParticles;
+    // ParticleSystem pickupParticles;  <-- eliminado por solicitud
 
     private bool collected = false;
 
@@ -27,13 +31,7 @@ public class Collectible : MonoBehaviour
                 GameManager.Instance.AddCollected();
         }
 
-        if (pickupParticles != null)
-        {
-            ParticleSystem ps = Instantiate(pickupParticles, transform.position, Quaternion.identity);
-            ps.Play();
-            Destroy(ps.gameObject, 2f);
-        }
-
+        // se activa un audio al colisionar 
         if (pickupSound != null)
             AudioSource.PlayClipAtPoint(pickupSound, transform.position);
 
