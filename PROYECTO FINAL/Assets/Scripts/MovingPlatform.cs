@@ -1,3 +1,12 @@
+/// <summary>
+/// Plataforma móvil configurable en dos ejes:
+/// - Se puede mover verticalmente (Y) y/o horizontalmente (X)
+///   según las distancias y velocidades asignadas.
+/// - Se detiene brevemente en los extremos según el tiempo de espera.
+/// - Cuando el jugador entra en el trigger, se convierte en hijo de la
+///   plataforma para que viaje junto a ella.
+/// - Al salir del trigger, se desparenta para recuperar el movimiento independiente.
+/// </summary>
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour

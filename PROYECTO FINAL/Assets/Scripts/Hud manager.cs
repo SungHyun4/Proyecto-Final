@@ -1,3 +1,8 @@
+/// <summary>
+/// Administra el HUD principal del juego, asegurando que exista una única instancia.
+/// Este objeto persiste entre escenas gracias a DontDestroyOnLoad,
+/// evitando que el HUD se duplique al cambiar de nivel.
+/// </summary>
 using UnityEngine;
 
 public class HUDManager : MonoBehaviour

@@ -1,3 +1,8 @@
+/// <summary>
+/// Cámara especial para la escena de caída libre.
+/// Sigue al jugador con un offset fijo y mantiene siempre la vista apuntando hacia -Y,
+/// simulando una caída vertical constante sin importar la rotación del modelo.
+/// </summary>
 using UnityEngine;
 
 public class FreeFallCameraFollow : MonoBehaviour

@@ -1,3 +1,10 @@
+/// <summary>
+/// Controlador del Menú Principal.
+/// Gestiona la navegación básica del menú:
+/// - Iniciar el juego cargando la primera escena.
+/// - Mostrar y ocultar el panel de instrucciones.
+/// Este script se usa únicamente en la pantalla de inicio.
+/// </summary>
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,4 +31,3 @@ public class MainMenuController : MonoBehaviour
         instructionsPanel.SetActive(false);
     }
 }
-

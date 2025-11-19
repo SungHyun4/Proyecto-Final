@@ -1,3 +1,11 @@
+/// <summary>
+/// Aplica una animación visual a objetos como coleccionables o plataformas decorativas.
+/// Características:
+/// - Rotación constante alrededor del eje Y, centrada en el propio objeto.
+/// - Movimiento de flotación basado en una onda seno para dar efecto de suspensión.
+/// 
+/// Se recomienda usarlo en ítems, pickups o elementos visuales no interactivos.
+/// </summary>
 using UnityEngine;
 
 public class FloatingRotator : MonoBehaviour

@@ -1,3 +1,9 @@
+/// <summary>
+/// Controla el movimiento del jugador en la escena de caída libre.
+/// Permite desplazamiento libre en los ejes X y Z mientras cae continuamente por gravedad.
+/// Detecta colisiones que provocan la muerte y respawn.
+/// Soporta aumentos permanentes de velocidad mediante un booster.
+/// </summary>
 using UnityEngine;
 using UnityEngine.InputSystem;
 

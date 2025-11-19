@@ -1,3 +1,12 @@
+/// <summary>
+/// Controlador global del juego.
+/// Se encarga de manejar el puntaje total, muertes, tiempo transcurrido,
+/// y actualizar la interfaz principal del HUD. 
+/// 
+/// Este objeto persiste entre escenas gracias a DontDestroyOnLoad,
+/// permitiendo que las estadísticas acumuladas se mantengan durante
+/// todo el recorrido del juego.
+/// </summary>
 using UnityEngine;
 using TMPro; // si usas TextMeshProUGUI en la interfaz
 
@@ -24,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Aplicar Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

@@ -1,3 +1,10 @@
+/// <summary>
+/// Punto final del nivel. 
+/// Cuando el jugador entra en el trigger:
+/// - Activa el panel final a través del FinalPanelController.
+/// - Detiene el movimiento del jugador, ya sea en modo caída libre o caminando.
+/// Solo reacciona a objetos con el tag "Player".
+/// </summary>
 using UnityEngine;
 
 public class GoalFinish : MonoBehaviour

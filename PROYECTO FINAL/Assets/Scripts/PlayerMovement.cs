@@ -1,4 +1,19 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Controla todo el movimiento del jugador en la Escena 1.
+/// Incluye:
+/// - Movimiento adelante/atrás (W/S) y rotación (A/D).
+/// - Salto con verificación real de suelo mediante un groundCheck.
+/// - Aplicación de gravedad manual.
+/// - Integración con Animator para actualizar parámetros de movimiento y salto.
+/// - Sistema de checkpoints: guarda la posición y permite respawn.
+/// - Detecta cuando el jugador cae fuera del nivel y registra una muerte en el GameManager.
+/// 
+/// Requiere:
+/// - CharacterController en el mismo GameObject.
+/// - Animator con parámetros "Velx", "Vely" e "IsGrounded".
+/// - Un objeto groundCheck con layerMask configurado.
+/// </summary>
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -59,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.y <= 0f)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.AddDeath();   // ← CAMBIADO
+                GameManager.Instance.AddDeath();
 
             RespawnAtCheckpoint();
         }
@@ -116,14 +131,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isGrounded && velocity.y < 0f)
-        {
             velocity.y = -2f;
-        }
 
         if (keyboard.spaceKey.wasPressedThisFrame && isGrounded)
-        {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -131,13 +142,7 @@ public class PlayerMovement : MonoBehaviour
         // ANIMACIONES
         if (anim != null)
         {
-            float targetVelX = 0f;
-
-            if (mouseOrbitCamera != null && mouseOrbitCamera.gameObject.activeSelf)
-            {
-                targetVelX = horizontal;
-            }
-
+            float targetVelX = (mouseOrbitCamera != null && mouseOrbitCamera.gameObject.activeSelf) ? horizontal : 0f;
             float targetVelY = vertical;
 
             velXCur = Mathf.Lerp(velXCur, targetVelX, 1f - Mathf.Exp(-Time.deltaTime / animDamp));
@@ -145,7 +150,6 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetFloat(VelX, velXCur);
             anim.SetFloat(VelY, velYCur);
-
             anim.SetBool(IsGroundedHash, isGrounded);
         }
     }

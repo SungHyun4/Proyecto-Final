@@ -1,3 +1,11 @@
+/// <summary>
+/// Cámara en tercera persona que sigue al jugador desde atrás.
+/// - Mantiene una distancia y altura configurables respecto al objetivo.
+/// - Suaviza el movimiento para crear un seguimiento fluido.
+/// - Rota suavemente para mantener al personaje siempre en pantalla.
+/// 
+/// Requiere asignar un "target" (el jugador) desde el inspector.
+/// </summary>
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour

@@ -1,8 +1,11 @@
+/// <summary>
+/// Marca un punto de control (checkpoint) que actualiza la posición de reaparición
+/// del jugador cuando entra en contacto con él. Solo se activa una vez.
+/// </summary>
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public ParticleSystem activateEffect;
     public AudioClip activateSound;
 
     private bool activated = false;
@@ -14,20 +17,13 @@ public class Checkpoint : MonoBehaviour
         PlayerMovement player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            // siempre actualizar al último checkpoint
+            // Actualizar siempre el último checkpoint alcanzado
             player.SetCheckpoint(transform);
 
-            // efectos solo la primera vez
+            // Sonido solo la primera vez
             if (!activated)
             {
                 activated = true;
-
-                if (activateEffect != null)
-                {
-                    ParticleSystem ps = Instantiate(activateEffect, transform.position, Quaternion.identity);
-                    ps.Play();
-                    Destroy(ps.gameObject, 2f);
-                }
 
                 if (activateSound != null)
                     AudioSource.PlayClipAtPoint(activateSound, transform.position);
@@ -35,4 +31,3 @@ public class Checkpoint : MonoBehaviour
         }
     }
 }
-

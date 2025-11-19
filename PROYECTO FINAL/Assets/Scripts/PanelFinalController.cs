@@ -1,3 +1,12 @@
+/// <summary>
+/// Controla el panel final del juego.
+/// - Muestra el puntaje, muertes y tiempo total al completar el nivel.
+/// - Detiene el temporizador del GameManager.
+/// - Permite reiniciar el nivel, volver al menú principal y salir del juego.
+/// 
+/// Este script debe estar asignado al panel final y conectado desde el inspector
+/// con los textos y botones correspondientes.
+/// </summary>
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
